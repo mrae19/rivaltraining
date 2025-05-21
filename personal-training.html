@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Training - Rival Training</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="images/rivallogowhite.avif" alt="Rival Training Logo">
+            </a>
+            <button class="mobile-menu-btn">☰</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="classes.html">Classes</a></li>
+                <li><a href="personal-training.html">Personal Training</a></li>
+                <li><a href="methods.html">Methods</a></li>
+                <li><a href="facility.html">Facility</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="https://calendly.com/rivaltraining" class="cta-button">Join a Class</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Personal Training Content -->
+    <section class="page-content">
+        <div class="container">
+            <h1>Personal Training</h1>
+            
+            <div class="training-intro">
+                <h2>Transform Your Fitness Journey</h2>
+                <p>Get personalized attention and customized training programs designed to help you achieve your specific fitness goals.</p>
+            </div>
+
+            <div class="trainer-profiles">
+                <div class="trainer-profile">
+                    <img src="images/courtney.avif" alt="Courtney">
+                    <div class="trainer-info">
+                        <h3>Courtney</h3>
+                        <p class="trainer-title">Certified Personal Trainer</p>
+                        <p>Specializing in strength training and functional fitness, Courtney helps clients build confidence and achieve their fitness goals through personalized programs.</p>
+                        <ul class="trainer-specialties">
+                            <li><i class="fas fa-check"></i> Strength Training</li>
+                            <li><i class="fas fa-check"></i> Functional Fitness</li>
+                            <li><i class="fas fa-check"></i> Nutrition Guidance</li>
+                        </ul>
+                        <a href="https://calendly.com/rivaltraining" class="btn btn-primary">Book with Courtney</a>
+                    </div>
+                </div>
+
+                <div class="trainer-profile">
+                    <img src="images/travis.avif" alt="Travis">
+                    <div class="trainer-info">
+                        <h3>Travis</h3>
+                        <p class="trainer-title">Senior Fitness Coach</p>
+                        <p>With years of experience in athletic performance and rehabilitation, Travis creates comprehensive training programs that focus on proper form and sustainable progress.</p>
+                        <ul class="trainer-specialties">
+                            <li><i class="fas fa-check"></i> Athletic Performance</li>
+                            <li><i class="fas fa-check"></i> Injury Prevention</li>
+                            <li><i class="fas fa-check"></i> Sports Conditioning</li>
+                        </ul>
+                        <a href="https://calendly.com/rivaltraining" class="btn btn-primary">Book with Travis</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="training-packages">
+                <h2>Training Packages</h2>
+                <div class="packages-grid">
+                    <div class="package-card">
+                        <h3>Single Session</h3>
+                        <p>Perfect for trying out personal training or occasional sessions</p>
+                        <a href="https://calendly.com/rivaltraining" class="btn btn-secondary">Book Now</a>
+                    </div>
+                    <div class="package-card">
+                        <h3>Monthly Package</h3>
+                        <p>8 sessions per month with consistent progress tracking</p>
+                        <a href="https://calendly.com/rivaltraining" class="btn btn-secondary">Book Now</a>
+                    </div>
+                    <div class="package-card">
+                        <h3>Premium Package</h3>
+                        <p>12 sessions per month with nutrition consultation</p>
+                        <a href="https://calendly.com/rivaltraining" class="btn btn-secondary">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Mountain Dog Design and Media. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Calendly Integration -->
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+</html> 

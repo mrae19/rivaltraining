@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facility - Rival Training</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="images/rivallogowhite.avif" alt="Rival Training Logo">
+            </a>
+            <button class="mobile-menu-btn">☰</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="classes.html">Classes</a></li>
+                <li><a href="personal-training.html">Personal Training</a></li>
+                <li><a href="methods.html">Methods</a></li>
+                <li><a href="facility.html">Facility</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="https://calendly.com/rivaltraining" class="cta-button">Join a Class</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Facility Content -->
+    <section class="page-content">
+        <div class="container">
+            <h1>Our Facility</h1>
+            
+            <div class="facility-grid">
+                <div class="facility-image">
+                    <img src="images/hero_bg.avif" alt="Rival Training Facility">
+                </div>
+                <div class="facility-info">
+                    <h2>State-of-the-Art Training Facility</h2>
+                    <p>Our facility is designed to provide the perfect environment for your fitness journey. With top-of-the-line equipment and a motivating atmosphere, we ensure you have everything you need to succeed.</p>
+                    <ul class="facility-features">
+                        <li><i class="fas fa-dumbbell"></i> Premium Strength Equipment</li>
+                        <li><i class="fas fa-running"></i> Cardio Training Zone</li>
+                        <li><i class="fas fa-shower"></i> Clean Locker Rooms</li>
+                        <li><i class="fas fa-parking"></i> Free Parking</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Mountain Dog Design and Media. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+</html> 
