@@ -3,9 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rival Training - Personal Training & Fitness Classes</title>
+    <title>Rival Training | Personal Training & Group Fitness — Kingston, ON</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Rival Training — expert personal training and group fitness in Kingston, ON. Science-based coaching built for real, lasting results. Book your first session today.">
+    <meta property="og:title" content="Rival Training | Personal Training & Group Fitness — Kingston, ON">
+    <meta property="og:description" content="Expert personal training and group fitness in Kingston, Ontario. Science-based coaching, real results.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<!-- TODO: replace with your live domain -->">
+    <meta property="og:image" content="<!-- TODO: replace with URL to a preview image (e.g. your hero photo) -->">
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -21,8 +28,9 @@
                 <li><a href="personal-training.html">Personal Training</a></li>
                 <li><a href="methods.html">Methods</a></li>
                 <li><a href="facility.html">Facility</a></li>
+                <li><a href="join.html">Join Our Team</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li><a href="https://calendly.com/rivaltraining" class="cta-button">Join a Class</a></li>
+                <li><a href="https://calendly.com/rivaltraining" class="cta-button">Book a Session</a></li>
             </ul>
         </div>
     </nav>
@@ -30,11 +38,35 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <h1>Transform Your Fitness Journey</h1>
-            <p>Expert-led training in a supportive environment</p>
+            <h1>Train Hard.<br>Train Smart.<br>Train Rival.</h1>
+            <p>Expert coaching in a professional environment</p>
             <div class="cta-buttons">
-                <a href="https://calendly.com/rivaltraining" class="btn btn-primary">Join a Class</a>
-                <a href="personal-training.html" class="btn btn-secondary">Request Personal Training</a>
+                <a href="https://calendly.com/rivaltraining" class="btn btn-primary">Book a Session</a>
+                <a href="join.html" class="btn btn-secondary">Trainers: Join Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="stats-bar">
+        <div class="container">
+            <div class="stats-grid fade-up">
+                <div class="stat-item">
+                    <span class="stat-number">5+</span>
+                    <span class="stat-label">Years Coaching</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">150+</span>
+                    <span class="stat-label">Clients Trained</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">2,000+</span>
+                    <span class="stat-label">Sessions Delivered</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">Kingston</span>
+                    <span class="stat-label">Ontario's Best</span>
+                </div>
             </div>
         </div>
     </section>
@@ -42,48 +74,52 @@
     <!-- Trainers Section -->
     <section class="trainers">
         <div class="container">
-            <h2>Meet Your Trainers</h2>
-            <div class="trainer-grid">
-                <div class="trainer-card">
+            <h2>Meet Your Trainer</h2>
+            <div class="trainer-profiles fade-up">
+                <div class="trainer-profile">
                     <img src="images/courtney.avif" alt="Courtney">
-                    <h3>Courtney</h3>
-                    <p>Certified personal trainer with a passion for helping clients achieve their fitness goals through personalized training programs.</p>
-                    <div class="trainer-actions">
-                        <a href="mailto:courtney@rivaltraining.ca" class="btn btn-secondary">Email Courtney</a>
+                    <div class="trainer-info">
+                        <h3>Courtney</h3>
+                        <span class="trainer-title">Certified Personal Trainer</span>
+                        <p>Specializing in strength training and functional fitness, Courtney helps clients build confidence and achieve lasting results through evidence-based, individualized programs.</p>
+                        <ul class="trainer-specialties">
+                            <li><i class="fas fa-check"></i> Strength Training</li>
+                            <li><i class="fas fa-check"></i> Functional Fitness</li>
+                            <li><i class="fas fa-check"></i> Nutrition Guidance</li>
+                        </ul>
+                        <a href="https://calendly.com/rivaltraining" class="btn btn-primary">Book with Courtney</a>
                     </div>
                 </div>
-                <div class="trainer-card">
-                    <img src="images/travis.avif" alt="Travis">
-                    <h3>Travis</h3>
-                    <p>Experienced fitness professional specializing in strength training and functional movement patterns.</p>
-                    <div class="trainer-actions">
-                        <a href="mailto:travis@rivaltraining.ca" class="btn btn-secondary">Email Travis</a>
+            </div>
+
+            <div class="trainer-profile trainer-cta-card">
+                <div class="trainer-cta-icon">
+                    <i data-lucide="plus"></i>
+                </div>
+                <div class="trainer-info">
+                    <div>
+                        <h3>Your Name Here</h3>
+                        <span class="trainer-title">Could This Be You?</span>
                     </div>
+                    <p>Looking for a professional space to train your clients? Rival is growing its team.</p>
+                    <a href="join.html" class="btn btn-outline-red">Join Our Team</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Class Schedule Section -->
-    <!-- <section class="schedule">
-        <div class="container">
-            <h2>Class Schedule</h2>
-            <div class="calendly-inline-widget" data-url="https://calendly.com/rivaltraining"></div>
-        </div>
-    </section> -->
-
     <!-- Testimonials Section -->
     <section class="testimonials">
         <div class="container">
             <h2>What Our Clients Say</h2>
-            <div class="testimonial-grid">
+            <div class="testimonial-grid fade-up">
                 <div class="testimonial-card">
-                    <p>"The best training experience I've ever had. The trainers are knowledgeable and supportive."</p>
-                    <cite>- Sarah M.</cite>
+                    <p>The best training experience I've ever had. The trainers are knowledgeable, supportive, and genuinely invested in your success.</p>
+                    <cite>— Sarah M.</cite>
                 </div>
                 <div class="testimonial-card">
-                    <p>"Rival Training has transformed my approach to fitness. The results speak for themselves."</p>
-                    <cite>- Mike R.</cite>
+                    <p>Rival Training has completely transformed my approach to fitness. The programming is smart and the results speak for themselves.</p>
+                    <cite>— Mike R.</cite>
                 </div>
             </div>
         </div>
@@ -94,29 +130,77 @@
         <div class="container">
             <h2>Follow Our Journey</h2>
             <div class="instagram-feed">
-                <!-- Instagram feed will be embedded here -->
                 <a href="https://www.instagram.com/rival_training/" class="instagram-link">
-                    <i class="fab fa-instagram"></i> @rival_training
+                    <i data-lucide="instagram"></i> @rival_training
                 </a>
             </div>
+        </div>
+    </section>
+
+    <!-- Trainer Recruitment Band -->
+    <section class="trainer-band">
+        <div class="container">
+            <h2>Are You a Trainer?</h2>
+            <p>Looking for a professional home to grow your coaching career? Rival is built for serious trainers.</p>
+            <a href="join.html" class="btn btn-primary">Learn About Joining Rival</a>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2025 Mountain Dog Design and Media. All rights reserved.</p>
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="images/rivallogowhite.avif" alt="Rival Training">
+                    <p>Professional personal training and group fitness. Built for people who are serious about results.</p>
+                </div>
+                <div class="footer-nav">
+                    <h4>Navigate</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="classes.html">Classes</a></li>
+                        <li><a href="personal-training.html">Personal Training</a></li>
+                        <li><a href="methods.html">Methods</a></li>
+                        <li><a href="facility.html">Facility</a></li>
+                        <li><a href="join.html">Join Our Team</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Get in Touch</h4>
+                    <p>1642 Bath Road<br>Kingston, ON K7M 4X6</p>
+                    <p><a href="tel:6138885032">613-888-5032</a></p>
+                    <p><a href="mailto:courtney@rivaltraining.ca">courtney@rivaltraining.ca</a></p>
+                    <a href="https://www.instagram.com/rival_training/" class="footer-social-link">
+                        <i data-lucide="instagram"></i> @rival_training
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Mountain Dog Design and Media. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
-    <!-- Calendly Integration -->
     <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-
-    <!-- Mobile Menu Script -->
     <script>
         document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
             document.querySelector('.nav-links').classList.toggle('active');
         });
     </script>
+    <script>
+        lucide.createIcons();
+        const cur = window.location.pathname.split('/').pop() || 'index.html';
+        document.querySelectorAll('.nav-links a:not(.cta-button)').forEach(a => {
+            if (a.getAttribute('href') === cur) a.classList.add('active');
+        });
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+    </script>
+    <div class="mobile-book-bar">
+        <a href="https://calendly.com/rivaltraining" class="btn btn-primary">Book a Session</a>
+    </div>
 </body>
-</html> 
+</html>
