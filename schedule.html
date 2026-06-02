@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Schedule | Rival Training</title>
+    <meta name="description" content="Book your spot in upcoming Rival Training classes. View availability and reserve your place online.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/booking.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="images/rivallogowhite.avif" alt="Rival Training Logo">
+            </a>
+            <button class="mobile-menu-btn">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="classes.html">Classes</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="personal-training.html">Personal Training</a></li>
+                <li><a href="methods.html">Methods</a></li>
+                <li><a href="facility.html">Facility</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="portal.html" class="cta-button" id="navPortalLink">My Bookings</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <span class="section-label">Reserve Your Spot</span>
+            <h1>Class Schedule</h1>
+        </div>
+    </div>
+
+    <section class="page-content">
+        <div class="container">
+
+            <!-- Day Filter -->
+            <div class="schedule-filters">
+                <button class="filter-btn active" data-day="all">All</button>
+                <button class="filter-btn" data-day="Mon">Mon</button>
+                <button class="filter-btn" data-day="Tue">Tue</button>
+                <button class="filter-btn" data-day="Wed">Wed</button>
+                <button class="filter-btn" data-day="Thu">Thu</button>
+                <button class="filter-btn" data-day="Fri">Fri</button>
+                <button class="filter-btn" data-day="Sat">Sat</button>
+            </div>
+
+            <!-- Class List -->
+            <div class="class-list" id="classList">
+                <!-- Populated by JS mock data -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Book Modal -->
+    <div class="modal-overlay" id="bookModal">
+        <div class="modal">
+            <button class="modal-close" id="bookModalClose"><i class="fas fa-times"></i></button>
+
+            <!-- Step 1: Not logged in -->
+            <div class="modal-step" id="stepAuth">
+                <div class="modal-icon"><i class="fas fa-lock"></i></div>
+                <h2>Sign in to Book</h2>
+                <p>Create a free account or sign in to reserve your spot.</p>
+                <div class="modal-auth-tabs">
+                    <button class="auth-tab active" data-tab="login">Sign In</button>
+                    <button class="auth-tab" data-tab="signup">Create Account</button>
+                </div>
+
+                <form class="auth-form" id="loginForm">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width:100%">Sign In</button>
+                </form>
+
+                <form class="auth-form" id="signupForm" style="display:none">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" placeholder="Your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" placeholder="Choose a password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width:100%">Create Account</button>
+                </form>
+            </div>
+
+            <!-- Step 2: Confirm booking -->
+            <div class="modal-step" id="stepConfirm" style="display:none">
+                <div class="modal-icon modal-icon--red"><i class="fas fa-calendar-check"></i></div>
+                <h2>Confirm Booking</h2>
+                <div class="booking-summary" id="bookingSummary">
+                    <!-- Populated by JS -->
+                </div>
+                <button class="btn btn-primary" style="width:100%" id="confirmBookBtn">Confirm My Spot</button>
+                <button class="btn-text" id="cancelBookBtn">Cancel</button>
+            </div>
+
+            <!-- Step 3: Booked -->
+            <div class="modal-step" id="stepBooked" style="display:none">
+                <div class="modal-icon modal-icon--green"><i class="fas fa-check-circle"></i></div>
+                <h2>You're Booked!</h2>
+                <p>Your spot has been reserved. You can manage your bookings from your portal.</p>
+                <a href="portal.html" class="btn btn-primary" style="width:100%;display:block;text-align:center;margin-top:1rem;">View My Bookings</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <a href="index.html" class="footer-logo">
+                <img src="images/rivallogowhite.avif" alt="Rival Training">
+            </a>
+            <p>&copy; 2025 Mountain Dog Design and Media. All rights reserved.</p>
+            <ul class="footer-links">
+                <li><a href="classes.html">Classes</a></li>
+                <li><a href="personal-training.html">Training</a></li>
+                <li><a href="facility.html">Facility</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        // ─────────────────────────────────────────
+        // MOCK DATA — replace with Firestore reads
+        // ─────────────────────────────────────────
+        const CLASSES = [
+            { id: 'c1',  day: 'Mon', date: 'Mon Apr 14', time: '6:00 AM',  name: 'Strength Training', trainer: 'Travis',   capacity: 10, booked: 7,  type: 'strength' },
+            { id: 'c2',  day: 'Mon', date: 'Mon Apr 14', time: '9:00 AM',  name: 'Group Training',    trainer: 'Courtney', capacity: 12, booked: 4,  type: 'group' },
+            { id: 'c3',  day: 'Mon', date: 'Mon Apr 14', time: '12:00 PM', name: 'HIIT',              trainer: 'Brady',    capacity: 10, booked: 10, type: 'hiit' },
+            { id: 'c4',  day: 'Mon', date: 'Mon Apr 14', time: '5:00 PM',  name: 'Strength Training', trainer: 'Travis',   capacity: 10, booked: 6,  type: 'strength' },
+            { id: 'c5',  day: 'Tue', date: 'Tue Apr 15', time: '7:00 AM',  name: 'HIIT',              trainer: 'Brady',    capacity: 10, booked: 3,  type: 'hiit' },
+            { id: 'c6',  day: 'Tue', date: 'Tue Apr 15', time: '9:00 AM',  name: 'Strength Training', trainer: 'Courtney', capacity: 10, booked: 9,  type: 'strength' },
+            { id: 'c7',  day: 'Tue', date: 'Tue Apr 15', time: '5:00 PM',  name: 'Group Training',    trainer: 'Brady',    capacity: 12, booked: 5,  type: 'group' },
+            { id: 'c8',  day: 'Wed', date: 'Wed Apr 16', time: '6:00 AM',  name: 'Strength Training', trainer: 'Travis',   capacity: 10, booked: 8,  type: 'strength' },
+            { id: 'c9',  day: 'Wed', date: 'Wed Apr 16', time: '9:00 AM',  name: 'Group Training',    trainer: 'Courtney', capacity: 12, booked: 6,  type: 'group' },
+            { id: 'c10', day: 'Wed', date: 'Wed Apr 16', time: '12:00 PM', name: 'HIIT',              trainer: 'Brady',    capacity: 10, booked: 2,  type: 'hiit' },
+            { id: 'c11', day: 'Thu', date: 'Thu Apr 17', time: '7:00 AM',  name: 'HIIT',              trainer: 'Brady',    capacity: 10, booked: 7,  type: 'hiit' },
+            { id: 'c12', day: 'Thu', date: 'Thu Apr 17', time: '5:00 PM',  name: 'Group Training',    trainer: 'Courtney', capacity: 12, booked: 3,  type: 'group' },
+            { id: 'c13', day: 'Fri', date: 'Fri Apr 18', time: '6:00 AM',  name: 'Strength Training', trainer: 'Travis',   capacity: 10, booked: 5,  type: 'strength' },
+            { id: 'c14', day: 'Fri', date: 'Fri Apr 18', time: '5:00 PM',  name: 'Strength Training', trainer: 'Travis',   capacity: 10, booked: 10, type: 'strength' },
+            { id: 'c15', day: 'Sat', date: 'Sat Apr 19', time: '7:00 AM',  name: 'Group Training',    trainer: 'Courtney', capacity: 15, booked: 8,  type: 'group' },
+            { id: 'c16', day: 'Sat', date: 'Sat Apr 19', time: '9:00 AM',  name: 'Strength Training', trainer: 'Brady',    capacity: 10, booked: 4,  type: 'strength' },
+        ];
+
+        // ─────────────────────────────────────────
+        // MOCK AUTH STATE — replace with Firebase Auth
+        // ─────────────────────────────────────────
+        function getMockUser() {
+            return JSON.parse(localStorage.getItem('mockUser') || 'null');
+        }
+        function getMockBookings() {
+            return JSON.parse(localStorage.getItem('mockBookings') || '[]');
+        }
+
+        // ─────────────────────────────────────────
+        // RENDER
+        // ─────────────────────────────────────────
+        var activeDay = 'all';
+        var selectedClass = null;
+
+        function spotsLeft(c) { return c.capacity - c.booked; }
+
+        function renderClasses() {
+            var list = document.getElementById('classList');
+            var bookings = getMockBookings();
+            var filtered = activeDay === 'all' ? CLASSES : CLASSES.filter(c => c.day === activeDay);
+
+            if (filtered.length === 0) {
+                list.innerHTML = '<p class="no-classes">No classes this day.</p>';
+                return;
+            }
+
+            var html = '';
+            var currentDay = '';
+            filtered.forEach(function(c) {
+                if (c.date !== currentDay) {
+                    if (currentDay) html += '</div>';
+                    html += '<div class="class-day-group"><h3 class="class-day-label">' + c.date + '</h3>';
+                    currentDay = c.date;
+                }
+
+                var spots = spotsLeft(c);
+                var full = spots <= 0;
+                var alreadyBooked = bookings.some(b => b.classId === c.id);
+                var spotsClass = spots <= 2 ? 'spots-low' : 'spots-ok';
+
+                html += '<div class="class-row ' + (full ? 'class-row--full' : '') + '">' +
+                    '<div class="class-row-time">' + c.time + '</div>' +
+                    '<div class="class-row-info">' +
+                        '<span class="class-tag class-tag--' + c.type + '">' + c.name + '</span>' +
+                        '<span class="class-row-trainer"><i class="fas fa-user"></i> ' + c.trainer + '</span>' +
+                    '</div>' +
+                    '<div class="class-row-spots ' + spotsClass + '">' +
+                        (full ? '<span class="spots-full">Full</span>' : '<span>' + spots + ' spot' + (spots === 1 ? '' : 's') + ' left</span>') +
+                    '</div>' +
+                    '<div class="class-row-action">';
+
+                if (alreadyBooked) {
+                    html += '<span class="booked-badge"><i class="fas fa-check"></i> Booked</span>';
+                } else if (full) {
+                    html += '<button class="btn-book" disabled>Full</button>';
+                } else {
+                    html += '<button class="btn-book" onclick="openBookModal(\'' + c.id + '\')">Book</button>';
+                }
+
+                html += '</div></div>';
+            });
+            if (currentDay) html += '</div>';
+            list.innerHTML = html;
+        }
+
+        // Day filter
+        document.querySelectorAll('.filter-btn').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                activeDay = this.dataset.day;
+                renderClasses();
+            });
+        });
+
+        // ─────────────────────────────────────────
+        // MODAL
+        // ─────────────────────────────────────────
+        function openBookModal(classId) {
+            selectedClass = CLASSES.find(c => c.id === classId);
+            var user = getMockUser();
+            document.getElementById('stepAuth').style.display    = user ? 'none' : 'block';
+            document.getElementById('stepConfirm').style.display = user ? 'block' : 'none';
+            document.getElementById('stepBooked').style.display  = 'none';
+
+            if (user) populateBookingSummary();
+
+            document.getElementById('bookModal').classList.add('active');
+        }
+
+        function closeBookModal() {
+            document.getElementById('bookModal').classList.remove('active');
+            selectedClass = null;
+        }
+
+        function populateBookingSummary() {
+            var c = selectedClass;
+            document.getElementById('bookingSummary').innerHTML =
+                '<div class="booking-summary-row"><span>' + c.date + '</span><strong>' + c.time + '</strong></div>' +
+                '<div class="booking-summary-row"><span>Class</span><strong>' + c.name + '</strong></div>' +
+                '<div class="booking-summary-row"><span>Trainer</span><strong>' + c.trainer + '</strong></div>' +
+                '<div class="booking-summary-row"><span>Spots left</span><strong>' + spotsLeft(c) + '</strong></div>';
+        }
+
+        document.getElementById('bookModalClose').addEventListener('click', closeBookModal);
+        document.getElementById('bookModal').addEventListener('click', function(e) {
+            if (e.target === this) closeBookModal();
+        });
+
+        // Auth tabs
+        document.querySelectorAll('.auth-tab').forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                var target = this.dataset.tab;
+                document.getElementById('loginForm').style.display  = target === 'login'  ? 'block' : 'none';
+                document.getElementById('signupForm').style.display = target === 'signup' ? 'block' : 'none';
+            });
+        });
+
+        // Mock login/signup — REPLACE with Firebase Auth
+        [document.getElementById('loginForm'), document.getElementById('signupForm')].forEach(function(form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                var nameInput = form.querySelector('input[type=text]');
+                // TODO: Firebase Auth — signInWithEmailAndPassword / createUserWithEmailAndPassword
+                localStorage.setItem('mockUser', JSON.stringify({
+                    name: nameInput ? nameInput.value : 'Member',
+                    email: form.querySelector('input[type=email]').value
+                }));
+                document.getElementById('stepAuth').style.display    = 'none';
+                document.getElementById('stepConfirm').style.display = 'block';
+                populateBookingSummary();
+                updateNavState();
+            });
+        });
+
+        // Confirm booking — REPLACE with Firestore write
+        document.getElementById('confirmBookBtn').addEventListener('click', function() {
+            if (!selectedClass) return;
+            var bookings = getMockBookings();
+            bookings.push({ classId: selectedClass.id, className: selectedClass.name, date: selectedClass.date, time: selectedClass.time, trainer: selectedClass.trainer });
+            localStorage.setItem('mockBookings', JSON.stringify(bookings));
+            // TODO: Firestore — add doc to bookings collection, decrement spotsLeft on class doc
+
+            document.getElementById('stepConfirm').style.display = 'none';
+            document.getElementById('stepBooked').style.display  = 'block';
+            renderClasses();
+        });
+
+        document.getElementById('cancelBookBtn').addEventListener('click', closeBookModal);
+
+        // Nav state
+        function updateNavState() {
+            var user = getMockUser();
+            var link = document.getElementById('navPortalLink');
+            if (user) link.textContent = 'My Bookings (' + getMockBookings().length + ')';
+        }
+
+        // Active nav
+        (function() {
+            var page = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.nav-links a').forEach(function(a) {
+                if (a.getAttribute('href') === page) a.classList.add('active');
+            });
+        })();
+
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Init
+        renderClasses();
+        updateNavState();
+    </script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Rival Training</title>
+    <meta name="description" content="Get in touch with the Rival Training team. Questions about classes, personal training, or the facility — we're here to help.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="images/rivallogowhite.avif" alt="Rival Training Logo">
+            </a>
+            <button class="mobile-menu-btn">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="classes.html">Classes</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="personal-training.html">Personal Training</a></li>
+                <li><a href="methods.html">Methods</a></li>
+                <li><a href="facility.html">Facility</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="portal.html" class="cta-button" id="navPortalLink">My Bookings</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <span class="section-label">Get In Touch</span>
+            <h1>Contact Us</h1>
+        </div>
+    </div>
+
+    <!-- Contact Content -->
+    <section class="page-content">
+        <div class="container">
+            <div class="contact-grid">
+
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <h2>Let's Talk</h2>
+                    <p>Have a question about classes, personal training, or the facility? Reach out and we'll get back to you as soon as possible.</p>
+
+                    <ul class="contact-details">
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <span class="contact-label">Email</span>
+                                <a href="mailto:info@rivaltraining.ca">info@rivaltraining.ca</a>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fab fa-instagram"></i>
+                            <div>
+                                <span class="contact-label">Instagram</span>
+                                <a href="https://www.instagram.com/rival_training/" target="_blank">@rival_training</a>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fas fa-calendar-alt"></i>
+                            <div>
+                                <span class="contact-label">Book a Session</span>
+                                <a href="https://calendly.com/rivaltraining" target="_blank">calendly.com/rivaltraining</a>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="contact-trainers">
+                        <h3>Reach a Trainer Directly</h3>
+                        <div class="trainer-contact-list">
+                            <a href="mailto:courtney@rivaltraining.ca" class="trainer-contact-item">
+                                <span class="trainer-contact-name">Courtney</span>
+                                <span class="trainer-contact-email">courtney@rivaltraining.ca</span>
+                            </a>
+                            <a href="mailto:travis@rivaltraining.ca" class="trainer-contact-item">
+                                <span class="trainer-contact-name">Travis</span>
+                                <span class="trainer-contact-email">travis@rivaltraining.ca</span>
+                            </a>
+                            <a href="mailto:brady@rivaltraining.ca" class="trainer-contact-item">
+                                <span class="trainer-contact-name">Brady</span>
+                                <span class="trainer-contact-email">brady@rivaltraining.ca</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form-wrap">
+                    <form class="contact-form" id="contactForm" novalidate>
+                        <!-- Replace YOUR_ACCESS_KEY with a key from web3forms.com (free) to enable real email delivery -->
+                        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY">
+                        <input type="hidden" name="subject" value="New message from Rival Training website">
+                        <input type="checkbox" name="botcheck" style="display:none;">
+
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" placeholder="Your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="topic">Topic</label>
+                            <select id="topic" name="topic">
+                                <option value="">Select a topic...</option>
+                                <option value="Group Classes">Group Classes</option>
+                                <option value="Personal Training">Personal Training</option>
+                                <option value="Membership">Membership</option>
+                                <option value="General Inquiry">General Inquiry</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" placeholder="How can we help?" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="submitBtn" style="width:100%;">Send Message</button>
+                    </form>
+
+                    <div class="form-success" id="formSuccess">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Message Sent</h3>
+                        <p>Thanks for reaching out — we'll get back to you shortly.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <a href="index.html" class="footer-logo">
+                <img src="images/rivallogowhite.avif" alt="Rival Training">
+            </a>
+            <p>&copy; 2025 Mountain Dog Design and Media. All rights reserved.</p>
+            <ul class="footer-links">
+                <li><a href="classes.html">Classes</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="personal-training.html">Training</a></li>
+                <li><a href="facility.html">Facility</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+        (function() {
+            var page = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.nav-links a').forEach(function(a) {
+                if (a.getAttribute('href') === page) a.classList.add('active');
+            });
+        })();
+
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            var btn = document.getElementById('submitBtn');
+            btn.textContent = 'Sending…';
+            btn.disabled = true;
+
+            var data = new FormData(this);
+            var accessKey = data.get('access_key');
+
+            // If a real access key is set, submit to Web3Forms
+            if (accessKey && accessKey !== 'YOUR_ACCESS_KEY') {
+                try {
+                    var res = await fetch('https://api.web3forms.com/submit', {
+                        method: 'POST',
+                        body: data
+                    });
+                    var json = await res.json();
+                    if (json.success) {
+                        showSuccess();
+                        return;
+                    }
+                } catch (err) {}
+                btn.textContent = 'Send Message';
+                btn.disabled = false;
+                alert('Something went wrong. Please email us directly at info@rivaltraining.ca');
+            } else {
+                // No backend configured — show success UI anyway for demo/preview
+                setTimeout(showSuccess, 600);
+            }
+        });
+
+        function showSuccess() {
+            document.getElementById('contactForm').style.display = 'none';
+            var s = document.getElementById('formSuccess');
+            s.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

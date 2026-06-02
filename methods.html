@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Training Methods - Rival Training</title>
+    <title>Training Methods | Rival Training</title>
+    <meta name="description" content="Rival Training uses science-based methods including progressive overload, periodization, and movement quality to deliver consistent, lasting results.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -14,52 +16,60 @@
             <a href="index.html" class="logo">
                 <img src="images/rivallogowhite.avif" alt="Rival Training Logo">
             </a>
-            <button class="mobile-menu-btn">☰</button>
+            <button class="mobile-menu-btn">&#9776;</button>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="classes.html">Classes</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
                 <li><a href="personal-training.html">Personal Training</a></li>
                 <li><a href="methods.html">Methods</a></li>
                 <li><a href="facility.html">Facility</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li><a href="https://calendly.com/rivaltraining" class="cta-button">Join a Class</a></li>
+                <li><a href="portal.html" class="cta-button" id="navPortalLink">My Bookings</a></li>
             </ul>
         </div>
     </nav>
 
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <span class="section-label">How We Train</span>
+            <h1>Our Methods</h1>
+        </div>
+    </div>
+
     <!-- Methods Content -->
     <section class="page-content">
         <div class="container">
-            <h1>Our Training Methods</h1>
-            
+
             <div class="methods-intro">
-                <h2>Science-Based Training Approach</h2>
-                <p>At Rival Training, we combine proven training methodologies with cutting-edge fitness science to deliver results-driven programs.</p>
+                <h2>Science-Based Training</h2>
+                <p>We combine proven training methodologies with cutting-edge fitness science to build programs that actually deliver lasting results.</p>
             </div>
 
             <div class="methods-grid">
                 <div class="method-card">
                     <i class="fas fa-dumbbell"></i>
                     <h3>Progressive Overload</h3>
-                    <p>We gradually increase the intensity of your workouts to ensure continuous improvement and prevent plateaus.</p>
+                    <p>We systematically increase intensity over time to ensure continuous adaptation and prevent training plateaus.</p>
                 </div>
 
                 <div class="method-card">
                     <i class="fas fa-heartbeat"></i>
                     <h3>Periodization</h3>
-                    <p>Our training programs are structured in phases to optimize performance and recovery.</p>
+                    <p>Programs are structured in deliberate phases to optimize performance output and recovery between training blocks.</p>
                 </div>
 
                 <div class="method-card">
                     <i class="fas fa-balance-scale"></i>
                     <h3>Movement Quality</h3>
-                    <p>We prioritize proper form and technique to maximize results and prevent injuries.</p>
+                    <p>Proper form and technique come first — maximizing long-term results while keeping you healthy and injury-free.</p>
                 </div>
 
                 <div class="method-card">
                     <i class="fas fa-chart-line"></i>
                     <h3>Progress Tracking</h3>
-                    <p>Regular assessments and measurements to ensure you're on track to reach your goals.</p>
+                    <p>Regular assessments and check-ins keep you accountable and ensure your program evolves with your progress.</p>
                 </div>
             </div>
 
@@ -67,12 +77,12 @@
                 <h2>Our Training Philosophy</h2>
                 <div class="philosophy-content">
                     <div class="philosophy-text">
-                        <p>We believe in a holistic approach to fitness that encompasses:</p>
+                        <p>We believe in a holistic approach to fitness that builds real, lasting change rather than chasing short-term fixes.</p>
                         <ul class="philosophy-list">
                             <li><i class="fas fa-check-circle"></i> Sustainable progress over quick fixes</li>
-                            <li><i class="fas fa-check-circle"></i> Individualized programming</li>
-                            <li><i class="fas fa-check-circle"></i> Proper nutrition and recovery</li>
-                            <li><i class="fas fa-check-circle"></i> Long-term lifestyle changes</li>
+                            <li><i class="fas fa-check-circle"></i> Individualized programming for every client</li>
+                            <li><i class="fas fa-check-circle"></i> Nutrition and recovery as part of the plan</li>
+                            <li><i class="fas fa-check-circle"></i> Long-term lifestyle changes that stick</li>
                         </ul>
                     </div>
                     <div class="philosophy-image">
@@ -80,24 +90,37 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
+            <a href="index.html" class="footer-logo">
+                <img src="images/rivallogowhite.avif" alt="Rival Training">
+            </a>
             <p>&copy; 2025 Mountain Dog Design and Media. All rights reserved.</p>
+            <ul class="footer-links">
+                <li><a href="classes.html">Classes</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="personal-training.html">Training</a></li>
+                <li><a href="facility.html">Facility</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
         </div>
     </footer>
 
-    <!-- Calendly Integration -->
-    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-
-    <!-- Mobile Menu Script -->
     <script>
         document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
             document.querySelector('.nav-links').classList.toggle('active');
         });
+        (function() {
+            var page = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.nav-links a').forEach(function(a) {
+                if (a.getAttribute('href') === page) a.classList.add('active');
+            });
+        })();
     </script>
 </body>
-</html> 
+</html>

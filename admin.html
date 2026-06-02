@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Rival Training</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/booking.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="images/rivallogowhite.avif" alt="Rival Training Logo">
+            </a>
+            <button class="mobile-menu-btn">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="admin.html">Admin</a></li>
+                <li><a href="#" id="adminSignOutBtn" class="cta-button">Sign Out</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Admin Login -->
+    <div id="viewAdminLogin">
+        <div class="page-header">
+            <div class="container">
+                <span class="section-label">Staff Only</span>
+                <h1>Admin Login</h1>
+            </div>
+        </div>
+        <section class="page-content">
+            <div class="container">
+                <div class="auth-card auth-card--narrow">
+                    <form id="adminLoginForm" class="auth-form-card">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="your@rivaltraining.ca" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" placeholder="Password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width:100%">Sign In as Admin</button>
+                        <!-- TODO: Firebase Auth — check user has role='admin' in Firestore users collection -->
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="viewAdminDashboard" style="display:none">
+        <div class="page-header">
+            <div class="container" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+                <div>
+                    <span class="section-label">Staff Dashboard</span>
+                    <h1>Manage Classes</h1>
+                </div>
+                <button class="btn btn-primary" id="openAddClassBtn">
+                    <i class="fas fa-plus"></i> Add Class
+                </button>
+            </div>
+        </div>
+
+        <section class="page-content">
+            <div class="container">
+
+                <!-- Stats -->
+                <div class="admin-stats">
+                    <div class="admin-stat-card">
+                        <span class="admin-stat-number" id="statTotalClasses">0</span>
+                        <span class="admin-stat-label">Classes this week</span>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span class="admin-stat-number" id="statTotalBookings">0</span>
+                        <span class="admin-stat-label">Total bookings</span>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span class="admin-stat-number" id="statAvailableSpots">0</span>
+                        <span class="admin-stat-label">Spots still available</span>
+                    </div>
+                    <div class="admin-stat-card">
+                        <span class="admin-stat-number" id="statFullClasses">0</span>
+                        <span class="admin-stat-label">Full classes</span>
+                    </div>
+                </div>
+
+                <!-- Admin Tabs -->
+                <div class="portal-tabs" style="margin-bottom:2rem;">
+                    <button class="portal-tab active" data-tab="classes">
+                        <i class="fas fa-calendar-alt"></i> Classes
+                    </button>
+                    <button class="portal-tab" data-tab="bookings">
+                        <i class="fas fa-users"></i> Bookings
+                    </button>
+                </div>
+
+                <!-- Classes Tab -->
+                <div class="portal-panel" id="adminTabClasses">
+                    <div id="adminClassList"></div>
+                </div>
+
+                <!-- Bookings Tab -->
+                <div class="portal-panel" id="adminTabBookings" style="display:none">
+                    <div class="admin-bookings-header">
+                        <input class="admin-search" type="text" id="bookingSearch" placeholder="Search by name or class...">
+                    </div>
+                    <div id="adminBookingsList"></div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <!-- Add / Edit Class Modal -->
+    <div class="modal-overlay" id="classModal">
+        <div class="modal">
+            <button class="modal-close" id="classModalClose"><i class="fas fa-times"></i></button>
+            <h2 id="classModalTitle">Add Class</h2>
+            <form id="classForm" style="margin-top:1.5rem;">
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                    <div class="form-group" style="grid-column:1/-1;">
+                        <label>Class Name</label>
+                        <select id="fieldClassName" required>
+                            <option value="">Select...</option>
+                            <option value="Strength Training">Strength Training</option>
+                            <option value="HIIT">HIIT</option>
+                            <option value="Group Training">Group Training</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Trainer</label>
+                        <select id="fieldTrainer" required>
+                            <option value="">Select...</option>
+                            <option value="Courtney">Courtney</option>
+                            <option value="Travis">Travis</option>
+                            <option value="Brady">Brady</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Capacity</label>
+                        <input type="number" id="fieldCapacity" min="1" max="30" value="10" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" id="fieldDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Time</label>
+                        <input type="time" id="fieldTime" required>
+                    </div>
+                </div>
+                <div style="display:flex;gap:1rem;margin-top:1.5rem;">
+                    <button type="submit" class="btn btn-primary" style="flex:1" id="classFormSubmitBtn">Add Class</button>
+                    <button type="button" class="btn btn-outline-dark" style="flex:1" id="classModalCancel">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirm Modal -->
+    <div class="modal-overlay" id="deleteModal">
+        <div class="modal modal--sm">
+            <div class="modal-icon modal-icon--warn"><i class="fas fa-trash"></i></div>
+            <h2>Delete Class?</h2>
+            <p id="deleteModalText">This will remove the class and notify all booked members.</p>
+            <div style="display:flex;gap:1rem;margin-top:1.5rem;">
+                <button class="btn btn-primary" id="deleteConfirmBtn" style="flex:1;background:var(--red)">Delete</button>
+                <button class="btn btn-outline-dark" id="deleteDismissBtn" style="flex:1">Keep</button>
+            </div>
+            <!-- TODO: on confirm — Firestore batch delete class doc + update all related booking docs to 'cancelled' -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <a href="index.html" class="footer-logo">
+                <img src="images/rivallogowhite.avif" alt="Rival Training">
+            </a>
+            <p>&copy; 2025 Mountain Dog Design and Media. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ─────────────────────────────────────────
+        // MOCK DATA — replace with Firestore reads
+        // ─────────────────────────────────────────
+        var adminClasses = [
+            { id: 'c1',  day: 'Mon', date: '2026-04-14', time: '06:00', name: 'Strength Training', trainer: 'Travis',   capacity: 10, booked: 7  },
+            { id: 'c2',  day: 'Mon', date: '2026-04-14', time: '09:00', name: 'Group Training',    trainer: 'Courtney', capacity: 12, booked: 4  },
+            { id: 'c3',  day: 'Mon', date: '2026-04-14', time: '12:00', name: 'HIIT',              trainer: 'Brady',    capacity: 10, booked: 10 },
+            { id: 'c4',  day: 'Tue', date: '2026-04-15', time: '07:00', name: 'HIIT',              trainer: 'Brady',    capacity: 10, booked: 3  },
+            { id: 'c5',  day: 'Tue', date: '2026-04-15', time: '09:00', name: 'Strength Training', trainer: 'Courtney', capacity: 10, booked: 9  },
+            { id: 'c6',  day: 'Wed', date: '2026-04-16', time: '06:00', name: 'Strength Training', trainer: 'Travis',   capacity: 10, booked: 8  },
+            { id: 'c7',  day: 'Thu', date: '2026-04-17', time: '17:00', name: 'Group Training',    trainer: 'Courtney', capacity: 12, booked: 3  },
+            { id: 'c8',  day: 'Fri', date: '2026-04-18', time: '06:00', name: 'Strength Training', trainer: 'Travis',   capacity: 10, booked: 5  },
+            { id: 'c9',  day: 'Sat', date: '2026-04-19', time: '07:00', name: 'Group Training',    trainer: 'Courtney', capacity: 15, booked: 8  },
+        ];
+
+        var adminBookings = [
+            { id: 'b1', memberName: 'Sarah M.',    memberEmail: 'sarah@email.com',   classId: 'c1', className: 'Strength Training', date: 'Mon Apr 14', time: '6:00 AM',  trainer: 'Travis' },
+            { id: 'b2', memberName: 'Mike R.',     memberEmail: 'mike@email.com',    classId: 'c1', className: 'Strength Training', date: 'Mon Apr 14', time: '6:00 AM',  trainer: 'Travis' },
+            { id: 'b3', memberName: 'Jessica T.',  memberEmail: 'jess@email.com',    classId: 'c2', className: 'Group Training',    date: 'Mon Apr 14', time: '9:00 AM',  trainer: 'Courtney' },
+            { id: 'b4', memberName: 'David L.',    memberEmail: 'david@email.com',   classId: 'c3', className: 'HIIT',              date: 'Mon Apr 14', time: '12:00 PM', trainer: 'Brady' },
+            { id: 'b5', memberName: 'Amanda K.',   memberEmail: 'amanda@email.com',  classId: 'c3', className: 'HIIT',              date: 'Mon Apr 14', time: '12:00 PM', trainer: 'Brady' },
+            { id: 'b6', memberName: 'Chris W.',    memberEmail: 'chris@email.com',   classId: 'c5', className: 'Strength Training', date: 'Tue Apr 15', time: '9:00 AM',  trainer: 'Courtney' },
+            { id: 'b7', memberName: 'Taylor N.',   memberEmail: 'taylor@email.com',  classId: 'c6', className: 'Strength Training', date: 'Wed Apr 16', time: '6:00 AM',  trainer: 'Travis' },
+        ];
+
+        var deleteTargetId = null;
+        var editTargetId   = null;
+
+        // ─────────────────────────────────────────
+        // MOCK AUTH — replace with Firebase Auth + role check
+        // ─────────────────────────────────────────
+        function getAdminUser() { return JSON.parse(localStorage.getItem('mockAdmin') || 'null'); }
+
+        function renderDashboard() {
+            var admin = getAdminUser();
+            document.getElementById('viewAdminLogin').style.display     = admin ? 'none'  : 'block';
+            document.getElementById('viewAdminDashboard').style.display = admin ? 'block' : 'none';
+            if (admin) {
+                renderStats();
+                renderAdminClasses();
+                renderAdminBookings();
+            }
+        }
+
+        // Stats
+        function renderStats() {
+            var totalBookings  = adminClasses.reduce((s, c) => s + c.booked, 0);
+            var availableSpots = adminClasses.reduce((s, c) => s + Math.max(0, c.capacity - c.booked), 0);
+            var fullClasses    = adminClasses.filter(c => c.booked >= c.capacity).length;
+            document.getElementById('statTotalClasses').textContent  = adminClasses.length;
+            document.getElementById('statTotalBookings').textContent  = totalBookings;
+            document.getElementById('statAvailableSpots').textContent = availableSpots;
+            document.getElementById('statFullClasses').textContent    = fullClasses;
+        }
+
+        // Admin class list
+        function renderAdminClasses() {
+            var html = adminClasses.map(function(c) {
+                var fill = Math.round((c.booked / c.capacity) * 100);
+                var full = c.booked >= c.capacity;
+                return '<div class="admin-class-row">' +
+                    '<div class="admin-class-main">' +
+                        '<div class="admin-class-date">' + formatDate(c.date) + '<span>' + formatTime(c.time) + '</span></div>' +
+                        '<div class="admin-class-info">' +
+                            '<strong>' + c.name + '</strong>' +
+                            '<span><i class="fas fa-user"></i> ' + c.trainer + '</span>' +
+                        '</div>' +
+                        '<div class="admin-class-fill">' +
+                            '<div class="fill-bar"><div class="fill-bar-inner ' + (full ? 'fill-bar--full' : '') + '" style="width:' + fill + '%"></div></div>' +
+                            '<span class="fill-label ' + (full ? 'fill-label--full' : '') + '">' + c.booked + ' / ' + c.capacity + (full ? ' · Full' : '') + '</span>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="admin-class-actions">' +
+                        '<button class="btn-icon" title="Edit" onclick="openEditClass(\'' + c.id + '\')"><i class="fas fa-pencil-alt"></i></button>' +
+                        '<button class="btn-icon btn-icon--danger" title="Delete" onclick="promptDeleteClass(\'' + c.id + '\')"><i class="fas fa-trash"></i></button>' +
+                    '</div>' +
+                '</div>';
+            }).join('');
+            document.getElementById('adminClassList').innerHTML = html || '<p class="no-classes">No classes scheduled.</p>';
+        }
+
+        // Admin bookings list
+        function renderAdminBookings(filter) {
+            var list = filter
+                ? adminBookings.filter(b => b.memberName.toLowerCase().includes(filter) || b.className.toLowerCase().includes(filter))
+                : adminBookings;
+
+            var html = list.map(function(b) {
+                return '<div class="admin-booking-row">' +
+                    '<div class="admin-booking-member">' +
+                        '<strong>' + b.memberName + '</strong>' +
+                        '<span>' + b.memberEmail + '</span>' +
+                    '</div>' +
+                    '<div class="admin-booking-class">' +
+                        '<strong>' + b.className + '</strong>' +
+                        '<span>' + b.date + ' · ' + b.time + ' · ' + b.trainer + '</span>' +
+                    '</div>' +
+                    '<div class="booking-card-status booking-status--upcoming">Upcoming</div>' +
+                    '<button class="btn-cancel" onclick="adminCancelBooking(\'' + b.id + '\')">Cancel</button>' +
+                '</div>';
+            }).join('');
+            document.getElementById('adminBookingsList').innerHTML = html || '<p class="no-classes">No bookings found.</p>';
+        }
+
+        // ─────────────────────────────────────────
+        // ACTIONS
+        // ─────────────────────────────────────────
+
+        // Add/edit class modal
+        document.getElementById('openAddClassBtn').addEventListener('click', function() {
+            editTargetId = null;
+            document.getElementById('classModalTitle').textContent    = 'Add Class';
+            document.getElementById('classFormSubmitBtn').textContent = 'Add Class';
+            document.getElementById('classForm').reset();
+            document.getElementById('classModal').classList.add('active');
+        });
+
+        function openEditClass(id) {
+            var c = adminClasses.find(x => x.id === id);
+            if (!c) return;
+            editTargetId = id;
+            document.getElementById('classModalTitle').textContent    = 'Edit Class';
+            document.getElementById('classFormSubmitBtn').textContent = 'Save Changes';
+            document.getElementById('fieldClassName').value = c.name;
+            document.getElementById('fieldTrainer').value  = c.trainer;
+            document.getElementById('fieldCapacity').value = c.capacity;
+            document.getElementById('fieldDate').value     = c.date;
+            document.getElementById('fieldTime').value     = c.time;
+            document.getElementById('classModal').classList.add('active');
+        }
+
+        document.getElementById('classForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // TODO: Firestore — addDoc or updateDoc in classes collection
+            var entry = {
+                id:       editTargetId || 'c' + Date.now(),
+                name:     document.getElementById('fieldClassName').value,
+                trainer:  document.getElementById('fieldTrainer').value,
+                capacity: parseInt(document.getElementById('fieldCapacity').value),
+                date:     document.getElementById('fieldDate').value,
+                time:     document.getElementById('fieldTime').value,
+                booked:   0,
+            };
+            if (editTargetId) {
+                var idx = adminClasses.findIndex(x => x.id === editTargetId);
+                entry.booked = adminClasses[idx].booked;
+                adminClasses[idx] = entry;
+            } else {
+                adminClasses.push(entry);
+            }
+            document.getElementById('classModal').classList.remove('active');
+            renderStats();
+            renderAdminClasses();
+        });
+
+        function promptDeleteClass(id) {
+            deleteTargetId = id;
+            var c = adminClasses.find(x => x.id === id);
+            document.getElementById('deleteModalText').textContent =
+                'Delete ' + c.name + ' on ' + formatDate(c.date) + ' at ' + formatTime(c.time) + '? ' +
+                (c.booked > 0 ? c.booked + ' member' + (c.booked > 1 ? 's' : '') + ' will be notified.' : 'No one is booked.');
+            document.getElementById('deleteModal').classList.add('active');
+        }
+
+        document.getElementById('deleteConfirmBtn').addEventListener('click', function() {
+            adminClasses = adminClasses.filter(c => c.id !== deleteTargetId);
+            deleteTargetId = null;
+            document.getElementById('deleteModal').classList.remove('active');
+            renderStats();
+            renderAdminClasses();
+        });
+
+        function adminCancelBooking(id) {
+            // TODO: Firestore — update booking status to 'cancelled', increment spotsLeft
+            adminBookings = adminBookings.filter(b => b.id !== id);
+            renderAdminBookings();
+            renderStats();
+        }
+
+        // Search
+        document.getElementById('bookingSearch').addEventListener('input', function() {
+            renderAdminBookings(this.value.trim().toLowerCase() || null);
+        });
+
+        // Admin tabs
+        document.querySelectorAll('#viewAdminDashboard .portal-tab').forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('#viewAdminDashboard .portal-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('#viewAdminDashboard .portal-panel').forEach(p => p.style.display = 'none');
+                this.classList.add('active');
+                var key = this.dataset.tab;
+                document.getElementById('adminTab' + key.charAt(0).toUpperCase() + key.slice(1)).style.display = 'block';
+            });
+        });
+
+        // Close modals
+        [['classModalClose', 'classModal'], ['classModalCancel', 'classModal'], ['deleteDismissBtn', 'deleteModal']].forEach(function(pair) {
+            document.getElementById(pair[0]).addEventListener('click', function() {
+                document.getElementById(pair[1]).classList.remove('active');
+            });
+        });
+        ['classModal', 'deleteModal'].forEach(function(id) {
+            document.getElementById(id).addEventListener('click', function(e) {
+                if (e.target === this) this.classList.remove('active');
+            });
+        });
+
+        // Mock admin login — REPLACE with Firebase Auth + role check
+        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // TODO: Firebase Auth — check user doc has role === 'admin'
+            localStorage.setItem('mockAdmin', JSON.stringify({ name: 'Courtney' }));
+            renderDashboard();
+        });
+
+        document.getElementById('adminSignOutBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            localStorage.removeItem('mockAdmin');
+            renderDashboard();
+        });
+
+        // Active nav + mobile menu
+        (function() {
+            var page = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.nav-links a').forEach(function(a) {
+                if (a.getAttribute('href') === page) a.classList.add('active');
+            });
+        })();
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Helpers
+        function formatDate(d) {
+            var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+            var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            var dt = new Date(d + 'T00:00:00');
+            return days[dt.getDay()] + ' ' + months[dt.getMonth()] + ' ' + dt.getDate();
+        }
+        function formatTime(t) {
+            var parts = t.split(':');
+            var h = parseInt(parts[0]), m = parts[1];
+            return (h > 12 ? h - 12 : h || 12) + ':' + m + ' ' + (h >= 12 ? 'PM' : 'AM');
+        }
+
+        // Init
+        renderDashboard();
+    </script>
+</body>
+</html>

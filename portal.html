@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings | Rival Training</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/booking.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="images/rivallogowhite.avif" alt="Rival Training Logo">
+            </a>
+            <button class="mobile-menu-btn">&#9776;</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="classes.html">Classes</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="personal-training.html">Personal Training</a></li>
+                <li><a href="methods.html">Methods</a></li>
+                <li><a href="facility.html">Facility</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="portal.html" class="cta-button">My Bookings</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Logged Out State -->
+    <div id="viewLoggedOut">
+        <div class="page-header">
+            <div class="container">
+                <span class="section-label">Member Portal</span>
+                <h1>Sign In</h1>
+            </div>
+        </div>
+        <section class="page-content">
+            <div class="container">
+                <div class="auth-card">
+                    <div class="auth-card-tabs">
+                        <button class="auth-tab active" data-tab="login">Sign In</button>
+                        <button class="auth-tab" data-tab="signup">Create Account</button>
+                    </div>
+
+                    <form id="portalLoginForm" class="auth-form-card">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" placeholder="Password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width:100%">Sign In</button>
+                        <p class="auth-small">Forgot your password? <a href="#">Reset it</a></p>
+                    </form>
+
+                    <form id="portalSignupForm" class="auth-form-card" style="display:none">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" placeholder="Your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" placeholder="Choose a password (min. 8 chars)" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width:100%">Create Account</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Logged In State -->
+    <div id="viewLoggedIn" style="display:none">
+        <div class="page-header">
+            <div class="container" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+                <div>
+                    <span class="section-label">Member Portal</span>
+                    <h1 id="portalGreeting">My Bookings</h1>
+                </div>
+                <button class="btn-ghost" id="signOutBtn"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
+            </div>
+        </div>
+
+        <section class="page-content">
+            <div class="container">
+
+                <!-- Portal Tabs -->
+                <div class="portal-tabs">
+                    <button class="portal-tab active" data-tab="upcoming">
+                        <i class="fas fa-calendar"></i> Upcoming
+                        <span class="tab-badge" id="upcomingCount">0</span>
+                    </button>
+                    <button class="portal-tab" data-tab="past">
+                        <i class="fas fa-history"></i> Past
+                    </button>
+                </div>
+
+                <!-- Upcoming Bookings -->
+                <div class="portal-panel" id="tabUpcoming">
+                    <div id="upcomingList"></div>
+                    <div class="portal-empty" id="upcomingEmpty" style="display:none">
+                        <i class="fas fa-calendar-plus"></i>
+                        <h3>No upcoming classes</h3>
+                        <p>You don't have anything booked yet.</p>
+                        <a href="schedule.html" class="btn btn-primary">Browse Schedule</a>
+                    </div>
+                </div>
+
+                <!-- Past Bookings -->
+                <div class="portal-panel" id="tabPast" style="display:none">
+                    <div id="pastList"></div>
+                    <div class="portal-empty" id="pastEmpty" style="display:none">
+                        <i class="fas fa-history"></i>
+                        <h3>No past classes yet</h3>
+                        <p>Your completed classes will appear here.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <!-- Cancel Confirm Modal -->
+    <div class="modal-overlay" id="cancelModal">
+        <div class="modal modal--sm">
+            <div class="modal-icon modal-icon--warn"><i class="fas fa-exclamation-triangle"></i></div>
+            <h2>Cancel Booking?</h2>
+            <p id="cancelModalText">Are you sure you want to cancel this booking? Your spot will be released.</p>
+            <div style="display:flex;gap:1rem;margin-top:1.5rem;">
+                <button class="btn btn-primary" id="cancelConfirmBtn" style="flex:1">Yes, Cancel</button>
+                <button class="btn btn-outline-dark" id="cancelDismissBtn" style="flex:1">Keep It</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <a href="index.html" class="footer-logo">
+                <img src="images/rivallogowhite.avif" alt="Rival Training">
+            </a>
+            <p>&copy; 2025 Mountain Dog Design and Media. All rights reserved.</p>
+            <ul class="footer-links">
+                <li><a href="classes.html">Classes</a></li>
+                <li><a href="personal-training.html">Training</a></li>
+                <li><a href="facility.html">Facility</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        // ─────────────────────────────────────────
+        // MOCK AUTH — replace with Firebase Auth
+        // ─────────────────────────────────────────
+        function getMockUser()     { return JSON.parse(localStorage.getItem('mockUser') || 'null'); }
+        function getMockBookings() { return JSON.parse(localStorage.getItem('mockBookings') || '[]'); }
+        function saveMockBookings(b) { localStorage.setItem('mockBookings', JSON.stringify(b)); }
+
+        // ─────────────────────────────────────────
+        // MOCK PAST bookings for demo richness
+        // ─────────────────────────────────────────
+        var PAST_BOOKINGS = [
+            { classId: 'past1', className: 'Strength Training', date: 'Mon Apr 7',  time: '6:00 AM', trainer: 'Travis',   status: 'completed' },
+            { classId: 'past2', className: 'HIIT',              date: 'Wed Apr 9',  time: '12:00 PM', trainer: 'Brady',   status: 'completed' },
+            { classId: 'past3', className: 'Group Training',    date: 'Sat Apr 12', time: '9:00 AM',  trainer: 'Courtney', status: 'completed' },
+        ];
+
+        // ─────────────────────────────────────────
+        // RENDER
+        // ─────────────────────────────────────────
+        var cancelTargetId = null;
+
+        function renderPortal() {
+            var user = getMockUser();
+            if (!user) {
+                document.getElementById('viewLoggedOut').style.display = 'block';
+                document.getElementById('viewLoggedIn').style.display  = 'none';
+                return;
+            }
+
+            document.getElementById('viewLoggedOut').style.display = 'none';
+            document.getElementById('viewLoggedIn').style.display  = 'block';
+            document.getElementById('portalGreeting').textContent  = 'Hey, ' + user.name.split(' ')[0];
+
+            var bookings = getMockBookings();
+            document.getElementById('upcomingCount').textContent = bookings.length;
+
+            // Upcoming
+            var upcomingList = document.getElementById('upcomingList');
+            if (bookings.length === 0) {
+                upcomingList.innerHTML = '';
+                document.getElementById('upcomingEmpty').style.display = 'block';
+            } else {
+                document.getElementById('upcomingEmpty').style.display = 'none';
+                upcomingList.innerHTML = bookings.map(function(b, i) {
+                    return '<div class="booking-card">' +
+                        '<div class="booking-card-left">' +
+                            '<div class="booking-card-date">' + b.date + '<span>' + b.time + '</span></div>' +
+                        '</div>' +
+                        '<div class="booking-card-info">' +
+                            '<h4>' + b.className + '</h4>' +
+                            '<span class="booking-card-trainer"><i class="fas fa-user"></i> ' + b.trainer + '</span>' +
+                        '</div>' +
+                        '<div class="booking-card-status booking-status--upcoming">Upcoming</div>' +
+                        '<button class="btn-cancel" onclick="promptCancel(' + i + ', \'' + b.className + '\', \'' + b.date + ' ' + b.time + '\')">Cancel</button>' +
+                    '</div>';
+                }).join('');
+            }
+
+            // Past (mock + any cancelled will show here in real version)
+            var pastList = document.getElementById('pastList');
+            if (PAST_BOOKINGS.length === 0) {
+                document.getElementById('pastEmpty').style.display = 'block';
+            } else {
+                document.getElementById('pastEmpty').style.display = 'none';
+                pastList.innerHTML = PAST_BOOKINGS.map(function(b) {
+                    return '<div class="booking-card booking-card--past">' +
+                        '<div class="booking-card-left">' +
+                            '<div class="booking-card-date">' + b.date + '<span>' + b.time + '</span></div>' +
+                        '</div>' +
+                        '<div class="booking-card-info">' +
+                            '<h4>' + b.className + '</h4>' +
+                            '<span class="booking-card-trainer"><i class="fas fa-user"></i> ' + b.trainer + '</span>' +
+                        '</div>' +
+                        '<div class="booking-card-status booking-status--completed"><i class="fas fa-check"></i> Completed</div>' +
+                    '</div>';
+                }).join('');
+            }
+        }
+
+        // Cancel flow
+        function promptCancel(index, className, datetime) {
+            cancelTargetId = index;
+            document.getElementById('cancelModalText').textContent =
+                'Cancel ' + className + ' on ' + datetime + '? Your spot will be released.';
+            document.getElementById('cancelModal').classList.add('active');
+        }
+
+        document.getElementById('cancelConfirmBtn').addEventListener('click', function() {
+            if (cancelTargetId === null) return;
+            // TODO: Firestore — update booking status to 'cancelled', increment spotsLeft on class doc
+            var bookings = getMockBookings();
+            bookings.splice(cancelTargetId, 1);
+            saveMockBookings(bookings);
+            cancelTargetId = null;
+            document.getElementById('cancelModal').classList.remove('active');
+            renderPortal();
+        });
+
+        document.getElementById('cancelDismissBtn').addEventListener('click', function() {
+            cancelTargetId = null;
+            document.getElementById('cancelModal').classList.remove('active');
+        });
+
+        // Portal tabs
+        document.querySelectorAll('.portal-tab').forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.portal-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.portal-panel').forEach(p => p.style.display = 'none');
+                this.classList.add('active');
+                document.getElementById('tab' + this.dataset.tab.charAt(0).toUpperCase() + this.dataset.tab.slice(1)).style.display = 'block';
+            });
+        });
+
+        // Auth tabs
+        document.querySelectorAll('#viewLoggedOut .auth-tab').forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('#viewLoggedOut .auth-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                var target = this.dataset.tab;
+                document.getElementById('portalLoginForm').style.display  = target === 'login'  ? 'block' : 'none';
+                document.getElementById('portalSignupForm').style.display = target === 'signup' ? 'block' : 'none';
+            });
+        });
+
+        // Mock login/signup — REPLACE with Firebase Auth
+        [document.getElementById('portalLoginForm'), document.getElementById('portalSignupForm')].forEach(function(form) {
+            if (!form) return;
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                var nameInput = form.querySelector('input[type=text]');
+                // TODO: Firebase Auth — signInWithEmailAndPassword / createUserWithEmailAndPassword
+                localStorage.setItem('mockUser', JSON.stringify({
+                    name: nameInput ? nameInput.value : 'Member',
+                    email: form.querySelector('input[type=email]').value
+                }));
+                renderPortal();
+            });
+        });
+
+        // Sign out — REPLACE with Firebase Auth signOut()
+        document.getElementById('signOutBtn').addEventListener('click', function() {
+            // TODO: Firebase Auth — auth.signOut()
+            localStorage.removeItem('mockUser');
+            renderPortal();
+        });
+
+        // Active nav + mobile menu
+        (function() {
+            var page = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.nav-links a').forEach(function(a) {
+                if (a.getAttribute('href') === page) a.classList.add('active');
+            });
+        })();
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Init
+        renderPortal();
+    </script>
+</body>
+</html>
